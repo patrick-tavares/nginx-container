@@ -39,7 +39,7 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
 
 RUN curl -o /etc/yum.repos.d/error_nginx.repo https://copr.fedorainfracloud.org/coprs/error/nginx/repo/epel-7/error-nginx-epel-7.repo && \
     yum install -y --setopt=tsflags=nodocs nginx && \
-    rpm -V $INSTALL_PKGS && \
+    rpm -V nginx && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
