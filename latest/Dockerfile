@@ -38,8 +38,9 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
     NGINX_APP_ROOT=${APP_ROOT}
 
 RUN curl -o /etc/yum.repos.d/error_nginx.repo https://copr.fedorainfracloud.org/coprs/error/nginx/repo/epel-7/error-nginx-epel-7.repo && \
-    yum install -y --setopt=tsflags=nodocs nginx && \
-    rpm -V nginx && \
+    INSTALL_PKGS="nss_wrapper bind-utils nginx" && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
@@ -57,10 +58,11 @@ RUN sed -i -f ${NGINX_APP_ROOT}/nginxconf.sed ${NGINX_CONF_PATH} && \
     mkdir -p ${NGINX_APP_ROOT}/etc/nginx.default.d/ && \
     mkdir -p ${NGINX_APP_ROOT}/src/nginx-start/ && \
     mkdir -p ${NGINX_CONTAINER_SCRIPTS_PATH}/nginx-start && \
+    mkdir -p /run/nginx
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     chmod -R a+rwx ${NGINX_APP_ROOT}/etc && \
-#    chmod -R a+rwx /var/opt/rh/rh-${NAME}${NGINX_SHORT_VER} && \
+    chmod -R a+rwx /run/nginx/ && \
     chmod -R a+rwx ${NGINX_CONTAINER_SCRIPTS_PATH}/nginx-start && \
     chown -R 1001:0 ${NGINX_APP_ROOT} && \
 #    chown -R 1001:0 /var/opt/rh/rh-${NAME}${NGINX_SHORT_VER} && \
