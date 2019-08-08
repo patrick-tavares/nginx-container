@@ -67,6 +67,6 @@ RUN sed -i -f ${NGINX_APP_ROOT}/nginxconf.sed ${NGINX_CONF_PATH} && \
     chown -R 1001:0 ${NGINX_CONTAINER_SCRIPTS_PATH}/nginx-start && \
     rpm-file-permissions
 
-#USER 1001
+USER 1001
 
 CMD $STI_SCRIPTS_PATH/usage
