@@ -38,6 +38,7 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
     NGINX_APP_ROOT=${APP_ROOT}
 
 RUN curl -o /etc/yum.repos.d/error_nginx.repo https://copr.fedorainfracloud.org/coprs/error/nginx/repo/epel-7/error-nginx-epel-7.repo && \
+    yum install -y centos-release-scl-rh && \
     INSTALL_PKGS="nss_wrapper bind-utils nginx" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
