@@ -44,7 +44,7 @@ RUN tar -xzf nginx-rpms.tar.gz && \
     yum install -y centos-release-scl-rh && \
     INSTALL_PKGS="nss_wrapper bind-utils nginx-*.rpm" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
+    rpm -V `echo $INSTALL_PKGS | sed 's/.rpm//g'` && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
