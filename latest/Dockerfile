@@ -37,7 +37,7 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
     NGINX_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/nginx \
     NGINX_APP_ROOT=${APP_ROOT}
 
-COPY ./* /tmp/
+COPY . /tmp/
 
 RUN ls -R /tmp
 
