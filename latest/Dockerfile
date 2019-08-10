@@ -37,6 +37,8 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
     NGINX_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/nginx \
     NGINX_APP_ROOT=${APP_ROOT}
 
+WORKDIR ${HOME}
+
 RUN echo $WORKDIR && echo ${WORKDIR} && echo $APP_ROOT && echo ${APP_ROOT} && echo $HOME && echo ${HOME}
 
 RUN ls -lahrt ../* && tar -xzf nginx-rpms.tar.gz && \
