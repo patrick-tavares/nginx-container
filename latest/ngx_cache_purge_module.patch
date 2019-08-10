@@ -1,23 +1,24 @@
---- ngx_cache_purge_module.c    2014-12-23 18:40:21.000000000 +0000
-+++ ngx_cache_purge_module.c.new        2019-08-09 10:29:11.910407977 +0000
-@@ -191,7 +191,6 @@
+--- ngx_cache_purge-2.3/ngx_cache_purge_module.c        2014-12-23 18:40:21.000000000 +0000
++++ ngx_cache_purge_module.c    2019-08-10 11:47:06.601225349 +0000
+@@ -1253,16 +1253,11 @@
+ {
+     ngx_chain_t   out;
+     ngx_buf_t    *b;
+-    ngx_str_t    *key;
+     ngx_int_t     rc;
+     size_t        len;
 
- static char ngx_http_cache_purge_success_page_tail[] =
- CRLF "</center>" CRLF
--"<hr><center>" NGINX_VER "</center>" CRLF
- "</body>" CRLF
- "</html>" CRLF
- ;
-@@ -1261,8 +1260,6 @@
-
+-    key = r->cache->keys.elts;
+-
      len = sizeof(ngx_http_cache_purge_success_page_top) - 1
-           + sizeof(ngx_http_cache_purge_success_page_tail) - 1
+-          + sizeof(ngx_http_cache_purge_success_page_tail) - 1
 -          + sizeof("<br>Key : ") - 1 + sizeof(CRLF "<br>Path: ") - 1
 -          + key[0].len + r->cache->file.name.len;
++          + sizeof(ngx_http_cache_purge_success_page_tail) - 1;
 
      r->headers_out.content_type.len = sizeof("text/html") - 1;
      r->headers_out.content_type.data = (u_char *) "text/html";
-@@ -1286,12 +1283,6 @@
+@@ -1286,12 +1281,6 @@
 
      b->last = ngx_cpymem(b->last, ngx_http_cache_purge_success_page_top,
                           sizeof(ngx_http_cache_purge_success_page_top) - 1);
