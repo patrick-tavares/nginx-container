@@ -1,6 +1,14 @@
---- ngx_cache_purge-2.3/ngx_cache_purge_module.c        2014-12-23 18:40:21.000000000 +0000
-+++ ngx_cache_purge_module.c    2019-08-10 11:47:06.601225349 +0000
-@@ -1253,16 +1253,11 @@
+--- ngx_cache_purge-2.3/ngx_cache_purge_module.c	2014-12-23 18:40:21.000000000 +0000
++++ ngx_cache_purge_module.c	2019-08-10 16:49:45.473331212 +0000
+@@ -191,7 +191,6 @@
+
+ static char ngx_http_cache_purge_success_page_tail[] =
+ CRLF "</center>" CRLF
+-"<hr><center>" NGINX_VER "</center>" CRLF
+ "</body>" CRLF
+ "</html>" CRLF
+ ;
+@@ -1253,16 +1252,11 @@
  {
      ngx_chain_t   out;
      ngx_buf_t    *b;
@@ -18,7 +26,7 @@
 
      r->headers_out.content_type.len = sizeof("text/html") - 1;
      r->headers_out.content_type.data = (u_char *) "text/html";
-@@ -1286,12 +1281,6 @@
+@@ -1286,12 +1280,6 @@
 
      b->last = ngx_cpymem(b->last, ngx_http_cache_purge_success_page_top,
                           sizeof(ngx_http_cache_purge_success_page_top) - 1);
