@@ -39,9 +39,10 @@ ENV NGINX_CONFIGURATION_PATH=${APP_ROOT}/etc/nginx.d \
 
 WORKDIR ${HOME}
 
-RUN echo $WORKDIR && echo ${WORKDIR} && echo $APP_ROOT && echo ${APP_ROOT} && echo $HOME && echo ${HOME}
+RUN echo $WORKDIR && echo $APP_ROOT && echo $HOME
+RUN ls -lahrt /tmp/* && echo $WORKDIR && ls -lahrt $WORKDIR/* && echo $APP_ROOT && ls -lahrt $APP_ROOT/* && echo $HOME && ls -lahrt $HOME/*
 
-RUN ls -lahrt ../* && tar -xzf nginx-rpms.tar.gz && \
+RUN tar -xzf nginx-rpms.tar.gz && \
     curl -o /etc/yum.repos.d/error_nginx.repo https://copr.fedorainfracloud.org/coprs/error/nginx/repo/epel-7/error-nginx-epel-7.repo && \
     yum install -y centos-release-scl-rh && \
     INSTALL_PKGS="nss_wrapper bind-utils nginx-*.rpm" && \
