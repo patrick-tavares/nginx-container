@@ -53,7 +53,7 @@ Source900:         //labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
 Patch0:            nginx-auto-cc-gcc.patch
 
 # remove detailed info from Successful Purge page
-Patch1:            https://raw.githubusercontent.com/patrick-tavares/nginx-container/master/latest/ngx_cache_purge_module.patch
+Patch1:            ngx_cache_purge_module.patch
 
 # downstream patch - changing logs permissions to 664 instead
 # previous 644
@@ -195,6 +195,7 @@ Requires:          nginx
 %setup -q
 %setup -T -D -a 900
 %patch0 -p0
+%patch1 -p0
 %patch2 -p1
 cp %{SOURCE200} %{SOURCE210} %{SOURCE10} %{SOURCE12} .
 
